@@ -21,10 +21,13 @@ load_dotenv(BASE_DIR / '.env')
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-ln5j-k#)yiaior00gh+hr(cl&h3g=46b@n-nnh!82pc&jy94ue'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-ln5j-k#)yiaior00gh+hr(cl&h3g=46b@n-nnh!82pc&jy94ue')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+
+if os.environ.get('DEBUG') == "FALSE":
+    DEBUG = False
 
 ALLOWED_HOSTS = [
     "*",
@@ -41,8 +44,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # 3rd party/library/framework apps
     'rest_framework',
 
+    # local apps
     'account',
     'home',
 ]
@@ -133,3 +138,4 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+AUTH_USER_MODEL = 'account.User'
