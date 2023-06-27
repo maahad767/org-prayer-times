@@ -48,8 +48,11 @@ INSTALLED_APPS = [
     'rest_framework',
 
     # local apps
+    'base',
     'account',
     'home',
+    'prayer',
+    'org',
 ]
 
 MIDDLEWARE = [
@@ -122,7 +125,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Dhaka'
 
 USE_I18N = True
 
