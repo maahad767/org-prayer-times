@@ -21,7 +21,7 @@ class Congregation(models.Model):
     time = models.TimeField(default=timezone.now)
 
     def __str__(self):
-        return f'{self.get_prayer_display()} at {self.place} at {self.time.strftime("%I:%M %p")}'
+        return f'{self.get_prayer_display()} at {self.floor} at {self.time.strftime("%I:%M %p")}'
 
     class Meta:
         ordering = ('time',)
