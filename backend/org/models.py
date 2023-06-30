@@ -14,7 +14,7 @@ class Office(models.Model):
 
 
 class Floor(models.Model):
-    office = models.ForeignKey(Office, on_delete=models.CASCADE)
+    office = models.ForeignKey(Office, on_delete=models.CASCADE, related_name='floors')
     number = models.IntegerField()
     imam = models.CharField(max_length=125, null=True, blank=True)
 

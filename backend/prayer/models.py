@@ -17,7 +17,7 @@ class Congregation(models.Model):
         max_length=10,
         choices=PrayerChoice.choices,
     )
-    place = models.ForeignKey(Floor, on_delete=models.SET_NULL, null=True)
+    floor = models.ForeignKey(Floor, on_delete=models.SET_NULL, null=True, related_name="congregations")
     time = models.TimeField(default=timezone.now)
 
     def __str__(self):
