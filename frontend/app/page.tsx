@@ -138,8 +138,6 @@ const App: React.FC = () => {
     },
   ];
 
-  console.log(selectedFloorId)
-
   return (
       <Layout>
         <Header
