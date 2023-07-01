@@ -4,7 +4,7 @@ from org.models import Office, Floor
 from org.serializers import (
     OfficeListSerializer,
     OfficeDetailSerializer,
-    FloorDetailSerializer,
+    FloorDetailSerializer, FloorListSerializer,
 )
 
 
@@ -22,6 +22,16 @@ class OfficeRetrieveView(generics.RetrieveAPIView):
     ]
     serializer_class = OfficeDetailSerializer
     queryset = Office.objects.all()
+
+
+class FloorListView(generics.ListAPIView):
+    permission_classes = [
+        permissions.AllowAny,
+    ]
+    serializer_class = FloorListSerializer
+
+    def get_queryset(self):
+        return Floor.objects.filter(office_id=self.kwargs.get("pk"))
 
 
 class FloorRetrieveView(generics.RetrieveAPIView):
