@@ -4,6 +4,7 @@ import React, {useEffect, useState} from 'react';
 import {Dropdown, Layout, Space, Table, theme} from 'antd';
 import {DownOutlined} from "@ant-design/icons";
 import {Congregation, Floor, Office} from "@/app/interfaces";
+import Spinner from "@/app/components/Spinner";
 
 
 const { Header, Content, Footer } = Layout;
@@ -12,6 +13,7 @@ const App: React.FC = () => {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
+  const [isLoading, setIsLoading] = useState(true);
   const [offices, setOffices] = useState<Office[]>([]);
   const [floors, setFloors] = useState<Floor[]>([]);
   const [congregations, setCongregations] = useState<Congregation[]>([]);
@@ -20,6 +22,7 @@ const App: React.FC = () => {
   const [isFloorSelectionEnabled, setIsFloorSelectionEnabled] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
     // Fetch the offices from the API
     fetch('http://localhost:8000/org/offices/')
         .then(response => {
@@ -49,6 +52,7 @@ const App: React.FC = () => {
       setIsFloorSelectionEnabled(true)
       fetchAndSetCongregations(savedFloorId);
     }
+    setIsLoading(false);
   }, []);
 
 
@@ -137,6 +141,11 @@ const App: React.FC = () => {
       align: 'right' as 'right'
     },
   ];
+
+  if (isLoading) {
+    return <Spinner />;
+  }
+
 
   return (
       <Layout>
